@@ -128,7 +128,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   labelText: 'Eg. abc@xyz.com',
                   keyboardType: TextInputType.text,
                   controller: emailController,
-                  obscureText: false,
                 ),
                 Row(
                   children: [
@@ -148,12 +147,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(
                   height: 23.0,
                 ),
-                TextFieldCustom(
+                PasswordTextFieldCustom(
                   text: 'Password',
                   labelText: 'Eg. ***************',
                   keyboardType: TextInputType.text,
                   controller: passwordController,
-                  obscureText: true,
                 ),
                 Row(
                   children: [

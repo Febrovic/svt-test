@@ -139,7 +139,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   labelText: 'Eg. Omar Mustafa',
                   keyboardType: TextInputType.text,
                   controller: nameController,
-                  obscureText: false,
                 ),
                 const SizedBox(
                   height: 23.0,
@@ -149,7 +148,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   labelText: 'Eg. abc@xyz.com',
                   keyboardType: TextInputType.emailAddress,
                   controller: emailController,
-                  obscureText: false,
                 ),
                 const SizedBox(
                   height: 23.0,
@@ -159,27 +157,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   labelText: 'Eg. 01234567890',
                   keyboardType: TextInputType.phone,
                   controller: mobileController,
-                  obscureText: false,
                 ),
                 const SizedBox(
                   height: 23.0,
                 ),
-                TextFieldCustom(
+                PasswordTextFieldCustom(
                   text: 'Password',
                   labelText: 'Eg. ***************',
                   keyboardType: TextInputType.text,
                   controller: passwordController,
-                  obscureText: true,
                 ),
                 const SizedBox(
                   height: 23.0,
                 ),
-                TextFieldCustom(
+                PasswordTextFieldCustom(
                   text: 'Confirm Password',
                   labelText: 'Eg. ***************',
                   keyboardType: TextInputType.text,
                   controller: confirmPasswordController,
-                  obscureText: true,
                 ),
                 const SizedBox(
                   height: 27.0,
