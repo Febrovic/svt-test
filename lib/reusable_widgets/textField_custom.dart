@@ -5,13 +5,15 @@ class TextFieldCustom extends StatefulWidget {
   final TextInputType keyboardType;
   final TextEditingController controller;
   final String text;
+  final Function() validator;
 
   const TextFieldCustom(
       {super.key,
       required this.labelText,
       required this.keyboardType,
       required this.controller,
-        required this.text});
+      required this.text,
+      required this.validator});
 
   @override
   State<TextFieldCustom> createState() => _TextFieldCustomState();
@@ -36,7 +38,8 @@ class _TextFieldCustomState extends State<TextFieldCustom> {
         const SizedBox(
           height: 6.0,
         ),
-        TextField(
+        TextFormField(
+          validator: widget.validator(),
           controller: widget.controller,
           cursorColor: const Color(0xFF176B87),
           keyboardType: widget.keyboardType,
@@ -60,22 +63,24 @@ class _TextFieldCustomState extends State<TextFieldCustom> {
   }
 }
 
-
 class PasswordTextFieldCustom extends StatefulWidget {
   final String labelText;
   final TextInputType keyboardType;
   final TextEditingController controller;
   final String text;
+  final Function(String? s) validator;
 
   const PasswordTextFieldCustom(
       {super.key,
-        required this.labelText,
-        required this.keyboardType,
-        required this.controller,
-        required this.text});
+      required this.labelText,
+      required this.keyboardType,
+      required this.controller,
+      required this.text,
+      required this.validator});
 
   @override
-  State<PasswordTextFieldCustom> createState() => _PasswordTextFieldCustomState();
+  State<PasswordTextFieldCustom> createState() =>
+      _PasswordTextFieldCustomState();
 }
 
 class _PasswordTextFieldCustomState extends State<PasswordTextFieldCustom> {
@@ -97,23 +102,32 @@ class _PasswordTextFieldCustomState extends State<PasswordTextFieldCustom> {
         const SizedBox(
           height: 6.0,
         ),
-        TextField(
+        TextFormField(
+          validator: (String? s) {
+            if (s!.isEmpty) {
+              return "please add data";
+            }
+            return null;
+          },
           controller: widget.controller,
           cursorColor: const Color(0xFF176B87),
           keyboardType: widget.keyboardType,
           obscureText: isHide,
           decoration: InputDecoration(
-            suffixIcon:IconButton(
+            // errorText: widget.validator(s),
+            suffixIcon: IconButton(
               onPressed: () {
                 setState(() {
                   isHide = !isHide;
                 });
               },
-              icon: isHide ? const Icon(
-                Icons.visibility_outlined,
-              ) : const Icon(
-                Icons.visibility_off_outlined,
-              ),
+              icon: isHide
+                  ? const Icon(
+                      Icons.visibility_outlined,
+                    )
+                  : const Icon(
+                      Icons.visibility_off_outlined,
+                    ),
             ),
             focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: Color(0xFF176B87)),
@@ -122,7 +136,7 @@ class _PasswordTextFieldCustomState extends State<PasswordTextFieldCustom> {
               borderSide: BorderSide(color: Color(0xFFCFD0D7)),
             ),
             contentPadding:
-            const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
             hintText: widget.labelText,
             hintStyle: const TextStyle(
               color: Color(0xFFCFD0D7),

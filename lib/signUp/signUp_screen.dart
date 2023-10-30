@@ -14,35 +14,40 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-
-
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final mobileController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
-  void register(String name, String email,String phone, String password, String token) async {
+  bool nameValidate = true;
+  bool emailValidate = true;
+  bool mobileValidate = true;
+  bool passwordValidate = true;
+  bool confirmPasswordValidate = true;
+
+  void register(String name, String email, String phone, String password,
+      String token) async {
     try {
-      Response response =
-      await post(Uri.parse('https://awaivia.com/api/users/register'), body: {
-        'name': name,
-        'email': email,
-        'mobile': phone,
-        'password': password,
-        'token':token,
-      });
+      Response response = await post(
+          Uri.parse('https://awaivia.com/api/users/register'),
+          body: {
+            'name': name,
+            'email': email,
+            'mobile': phone,
+            'password': password,
+            'token': token,
+          });
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body.toString());
         if (data['success']) {
-
           Navigator.of(context).pushReplacement(MaterialPageRoute(
               builder: (BuildContext context) => const LoginScreen()));
         } else {
           showDialog(
               context: context,
               builder: (BuildContext context) {
-                return  AlertDialog(
+                return AlertDialog(
                   title: Text(
                     data['message'],
                     style: const TextStyle(
@@ -84,7 +89,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
           });
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -139,6 +143,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   labelText: 'Eg. Omar Mustafa',
                   keyboardType: TextInputType.text,
                   controller: nameController,
+                  validator: () {
+                    nameValidate ? null : 'name not correct';
+                  },
                 ),
                 const SizedBox(
                   height: 23.0,
@@ -148,6 +155,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   labelText: 'Eg. abc@xyz.com',
                   keyboardType: TextInputType.emailAddress,
                   controller: emailController,
+                  validator: () {
+                    emailValidate ? null : 'email not correct';
+                  },
                 ),
                 const SizedBox(
                   height: 23.0,
@@ -157,16 +167,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   labelText: 'Eg. 01234567890',
                   keyboardType: TextInputType.phone,
                   controller: mobileController,
+                  validator: () {
+                    mobileValidate ? null : 'mobile not correct';
+                  },
                 ),
                 const SizedBox(
                   height: 23.0,
                 ),
                 PasswordTextFieldCustom(
-                  text: 'Password',
-                  labelText: 'Eg. ***************',
-                  keyboardType: TextInputType.text,
-                  controller: passwordController,
-                ),
+                    text: 'Password',
+                    labelText: 'Eg. ***************',
+                    keyboardType: TextInputType.text,
+                    controller: passwordController,
+                    validator: (S) {}),
                 const SizedBox(
                   height: 23.0,
                 ),
@@ -175,6 +188,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   labelText: 'Eg. ***************',
                   keyboardType: TextInputType.text,
                   controller: confirmPasswordController,
+                  validator: (String? s) {},
                 ),
                 const SizedBox(
                   height: 27.0,
@@ -184,18 +198,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: ButtonWithoutImage(
                       text: 'SignUp',
                       pressed: () {
-                        passwordController.text == confirmPasswordController.text ?
-                        register(
-                          emailController.text,
-                          passwordController.text,
-                          mobileController.text,
-                          nameController.text,
-                          'asd',
-                        ): showDialog(context: context, builder: (BuildContext context){
-                          return const AlertDialog(
-                            title: Text('Confirm password not like password'),
-                          );
-                        });
+                        passwordController.text ==
+                                confirmPasswordController.text
+                            ? register(
+                                emailController.text,
+                                passwordController.text,
+                                mobileController.text,
+                                nameController.text,
+                                'asd',
+                              )
+                            : showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return const AlertDialog(
+                                    title: Text(
+                                        'Confirm password not like password'),
+                                  );
+                                });
                       }),
                 ),
                 const SizedBox(
