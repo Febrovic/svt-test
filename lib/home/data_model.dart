@@ -10,13 +10,15 @@ class Model {
   });
 }
 
-
 class ModelsApi {
   Future<List<Model>> getModels() async {
     List<Model> models = [
-      const Model(name: 'Model-A', progress: 50, imageUrl: 'images/Rectangle 1.jpg'),
-      const Model(name: 'Model-A', progress: 50, imageUrl: 'images/Rectangle 1.jpg'),
-      const Model(name: 'Model-A', progress: 50, imageUrl: 'images/Rectangle 1.jpg'),
+      const Model(
+          name: 'Model-A', progress: 50, imageUrl: 'images/Rectangle 1.jpg'),
+      const Model(
+          name: 'Model-A', progress: 50, imageUrl: 'images/Rectangle 1.jpg'),
+      const Model(
+          name: 'Model-A', progress: 50, imageUrl: 'images/Rectangle 1.jpg'),
     ];
     return models;
   }

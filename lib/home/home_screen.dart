@@ -239,7 +239,7 @@ class _ModelsListViewState extends State<ModelsListView> {
               elevation: 20.0,
               borderRadius: const BorderRadius.all(Radius.circular(20)),
               child: InkWell(
-                onTap: (){
+                onTap: () {
                   setState(() {
                     isPressed = !isPressed;
                   });
@@ -249,11 +249,11 @@ class _ModelsListViewState extends State<ModelsListView> {
                   height: 160,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: !isPressed ? Colors.white: const Color(0xFF5885BC),
+                    color: !isPressed ? Colors.white : const Color(0xFF5885BC),
                   ),
                   child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 20, horizontal: 10),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -315,7 +315,8 @@ class _ModelsListViewState extends State<ModelsListView> {
             shrinkWrap: true,
             separatorBuilder: (context, index) => const SizedBox(
               width: 18,
-            ), itemCount: snapshot.data!.length,
+            ),
+            itemCount: snapshot.data!.length,
           );
         }
       },

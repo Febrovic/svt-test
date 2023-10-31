@@ -5,15 +5,14 @@ abstract class GetDataState {}
 
 class LoadingState extends GetDataState {}
 
-class LoadedModelsState extends GetDataState{
-  final List<Model>models;
+class LoadedModelsState extends GetDataState {
+  final List<Model> models;
 
   LoadedModelsState(this.models);
   List<Object> get props => [models];
-
 }
 
-class ErrorState extends GetDataState{
+class ErrorState extends GetDataState {
   final String message;
 
   ErrorState(this.message);

@@ -14,7 +14,7 @@ class ButtonWithoutImage extends StatelessWidget {
       child: ElevatedButton(
         style: ButtonStyle(
           backgroundColor:
-          MaterialStateProperty.all<Color>(const Color(0xFF5885BC)),
+              MaterialStateProperty.all<Color>(const Color(0xFF5885BC)),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.0),

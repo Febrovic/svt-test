@@ -5,15 +5,14 @@ class TextFieldCustom extends StatefulWidget {
   final TextInputType keyboardType;
   final TextEditingController controller;
   final String text;
-  final Function() validator;
 
-  const TextFieldCustom(
-      {super.key,
-      required this.labelText,
-      required this.keyboardType,
-      required this.controller,
-      required this.text,
-      required this.validator});
+  const TextFieldCustom({
+    super.key,
+    required this.labelText,
+    required this.keyboardType,
+    required this.controller,
+    required this.text,
+  });
 
   @override
   State<TextFieldCustom> createState() => _TextFieldCustomState();
@@ -39,7 +38,12 @@ class _TextFieldCustomState extends State<TextFieldCustom> {
           height: 6.0,
         ),
         TextFormField(
-          validator: widget.validator(),
+          validator: (String? s) {
+            if (s!.isEmpty) {
+              return "please add data";
+            }
+            return null;
+          },
           controller: widget.controller,
           cursorColor: const Color(0xFF176B87),
           keyboardType: widget.keyboardType,
@@ -68,15 +72,14 @@ class PasswordTextFieldCustom extends StatefulWidget {
   final TextInputType keyboardType;
   final TextEditingController controller;
   final String text;
-  final Function(String? s) validator;
 
-  const PasswordTextFieldCustom(
-      {super.key,
-      required this.labelText,
-      required this.keyboardType,
-      required this.controller,
-      required this.text,
-      required this.validator});
+  const PasswordTextFieldCustom({
+    super.key,
+    required this.labelText,
+    required this.keyboardType,
+    required this.controller,
+    required this.text,
+  });
 
   @override
   State<PasswordTextFieldCustom> createState() =>
